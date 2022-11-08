@@ -1,0 +1,7 @@
+result_home: {"key": "Hi bro!"}
+result_all_products_no_data: {"products": []}
+result_all_categories_no_data: {"categories": []}
+test_all_product_category_no_data: {"products_categories": []}
+result_all_products_data: {"products":[{"product_name":"product_1","categories":["category_1","category_2"]},{"product_name":"product_2","categories":["category_1"]},{"product_name":"product_3","categories":[]}]}
+result_all_categories_data: {"categories":[{"category_name":"category_1","products":["product_1","product_2"]},{"category_name":"category_2","products":["product_1"]},{"category_name":"category_3","products":[]}]}
+test_all_product_category_data: {"products_categories":[{"product_name":"product_1","category_name":"category_1"},{"product_name":"product_1","category_name":"category_2"},{"product_name":"product_2","category_name":"category_1"}]}

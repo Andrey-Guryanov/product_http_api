@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  postgres_db:
+    ports:
+      - '${DB_PORT}:5432'
+    container_name: postgres_db
+    hostname: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - /pgdata:/var/lib/postgresql/data
+    image: postgres:15
+    env_file:
+      - .env
+
+  nginx_server:
+    image: nginx:1.19.3
+    restart: always
+    ports:
+      - '${API_PORT}:8080'
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - postgres_db
+    env_file:
+      - .env
+
+  api_service:
+    build:
+      context: ./
+      dockerfile: ./api/Dockerfile
+    container_name: api_service
+    hostname: api_service
+    restart: always
+    depends_on:
+      - nginx_server
+volumes:
+  pgdata:
